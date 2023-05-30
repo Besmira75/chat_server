@@ -78,3 +78,48 @@ void handle_client(struct message msg) {
     exit(EXIT_SUCCESS);
 }
 
+int main(int argc, char **argv) {
+    if (argc != 2) {
+        printf("Usage: %s <key>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    key_t key = atoi(argv[1]);
+    if (key <= 0) {
+        printf("Invalid key\n");
+        return EXIT_FAILURE;
+    }
+
+    // Create the message queue
+    msgqid = msgget(key, IPC_CREAT | 0666);
+    if (msgqid == -1) {
+        perror("msgget: create message queue failed");
+        return EXIT_FAILURE;
+    }
+
+    signal(SIGINT, cleanup);
+
+    printf("=== WELCOME TO THE CHATROOM ===\n");
+
+    struct message msg;
+    while (1) {
+        if (msgrcv(msgqid, &msg, sizeof(msg.mtext), 1, 0) == -1) {
+            perror("msgrcv: receive message failed");
+            return EXIT_FAILURE;
+        }
+
+        printf("%s has joined\n", msg.mtext);
+
+        pid_t pid = fork();
+        if (pid == -1) {
+            perror("fork: create child process failed");
+            return EXIT_FAILURE;
+        } else if (pid == 0) {
+            // Child process
+            handle_client(msg);
+        }
+    }
+
+    return EXIT_SUCCESS;
+}
+
