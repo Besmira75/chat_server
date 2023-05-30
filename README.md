@@ -1,11 +1,10 @@
 # SIMPLE CHAT SERVER
-Simple Chat Server është një aplikacion i thjeshtë server i cili lejon dy e shumë klientë të lidhen dhe të komunikojnë me njëri tjetrin
-në një mjedis të ngjashëm me “chatrooms”. Ai është programuar duke përdorur gjuhën C dhe është i krijuar për tu ekzekutuar në sistemIN operativ
-që mbështet programimin e socket-ave, siç është Linux.
+Simple Chat Server është një aplikacion i thjeshtë server i cili lejon dy e më shumë klientë të lidhen dhe të komunikojnë me njëri tjetrin
+në një mjedis të ngjashëm me “chatrooms”. Ai është programuar duke përdorur gjuhën C dhe është i krijuar për tu ekzekutuar në sistemin operativ.
 
 # Struktura dhe përshkrimi i Simple Chat Server
 Server.c:
-Së pari hapim lidhjen me server përmes komandës ./server <key>
+Së pari hapim lidhjen me server përmes komandës ./server <key>, dhe do të na shfaqen klientët që janë lidhur në server të cilët do të komunikojnë me njëri-tjetrin.
 
 Client.c:
 Pas lidhjes me server, hapim terminalet në bazë të numrit të klientave që do të lidhen dhe qasemi në server përmes komandës ./client <key> <name>
