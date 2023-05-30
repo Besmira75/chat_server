@@ -11,8 +11,8 @@ Client.c:
 Pas lidhjes me server, hapim terminalet në bazë të numrit të klientave që do të lidhen dhe qasemi në server përmes komandës ./client <key> <name>
 Ky file paraqet client-side të kodit. Kur ekzekutohet, kërkon nga useri të shtyp çelësin dhe emrin e klientit. Pastaj krijon lidhje me serverin duke u lidhur përmes message queue duke përdorur çelësin.
 Nga klienti krijohen 2 threads: një për dërgim mesazhesh, dhe një për marrje mesazhesh:
-1. send_msg_handler()
-2. recv_msg_handler()
+1. send_msg_thread
+2. recv_msg_thread
 
 # Dokumentimi i projektit 
 [Dokumentimi:]
