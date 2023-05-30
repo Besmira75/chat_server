@@ -70,3 +70,46 @@ void recv_msg_handler() {
     }
 }
 
+int main(int argc, char **argv) {
+    if (argc != 3) {
+        printf("Usage: %s <key> <client_name>\n", argv[0]);
+        return EXIT_FAILURE;
+    }
+
+    key_t key = atoi(argv[1]);
+    if (key <= 0) {
+        printf("Invalid key\n");
+        return EXIT_FAILURE;
+    }
+
+    strncpy(client_name, argv[2], MAX_NAME_SIZE);
+
+    // Connect to the message queue
+    msgqid = msgget(key, 0666);
+    if (msgqid == -1) {
+        perror("msgget: create message queue failed");
+        return EXIT_FAILURE;
+    }
+
+    signal(SIGINT, cleanup);
+
+    printf("=== WELCOME TO THE CHATROOM ===\n");
+
+    pthread_t send_msg_thread;
+    if (pthread_create(&send_msg_thread, NULL, (void *)send_msg_handler, NULL) != 0) {
+        printf("ERROR: pthread\n");
+        return EXIT_FAILURE;
+    }
+
+    pthread_t recv_msg_thread;
+    if (pthread_create(&recv_msg_thread, NULL, (void *)recv_msg_handler, NULL) != 0) {
+        printf("ERROR: pthread\n");
+        return EXIT_FAILURE;
+    }
+
+    pthread_join(send_msg_thread, NULL);
+    pthread_join(recv_msg_thread, NULL);
+
+    return EXIT_SUCCESS;
+}
+
