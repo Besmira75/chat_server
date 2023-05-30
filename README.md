@@ -14,7 +14,7 @@ Nga klienti krijohen 2 threads: një për dërgim mesazhesh, dhe një për marrj
 2. recv_msg_thread
 
 # Dokumentimi i projektit 
-[Dokumentimi:]
+[Dokumentimi:](https://docs.google.com/document/d/18UvZuPlM_Io8txPY4DCcHPVzOZsceObs0zGGg7gi7Wc/edit?usp=sharing)
 
 # Grupi punues:
 •[Dafina Balaj](https://github.com/dafinabalaj) 
@@ -28,7 +28,7 @@ Nga klienti krijohen 2 threads: një për dërgim mesazhesh, dhe një për marrj
 
 # Lënda 
 Sisteme Operative
-# Profesoreshë
+# Profesor
 Prof. As. Dr. Artan Mazrekaj
 # Asistente
 MSc. Dalinë Vranovci
