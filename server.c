@@ -48,7 +48,7 @@ void handle_client(struct message msg) {
             exit(EXIT_FAILURE);
         }
 
-        // Broadcast the message to all clients
+
         for (int i = 0; i < MAX_CLIENTS; i++) {
             if (clients[i].pid != 0 && clients[i].pid != getpid()) {
                 strcpy(reply.mtext, clients[i].name);
