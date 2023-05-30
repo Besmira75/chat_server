@@ -5,7 +5,7 @@
 #include <sys/types.h>
 #include <sys/ipc.h>
 #include <sys/msg.h>
-#include <signal.h> // Add this line
+#include <signal.h>
 #define MAX_TEXT_SIZE 2048
 #define MAX_CLIENTS 100
 
@@ -33,7 +33,7 @@ void handle_client(struct message msg) {
     struct message reply;
     reply.mtype = 2;
 
-    // Save client name and process ID
+  
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (clients[i].pid == 0) {
             clients[i].pid = getpid();
@@ -66,7 +66,7 @@ void handle_client(struct message msg) {
             break;
     }
 
-    // Remove client from the list
+    
     for (int i = 0; i < MAX_CLIENTS; i++) {
         if (clients[i].pid == getpid()) {
             clients[i].pid = 0;
@@ -90,7 +90,7 @@ int main(int argc, char **argv) {
         return EXIT_FAILURE;
     }
 
-    // Create the message queue
+
     msgqid = msgget(key, IPC_CREAT | 0666);
     if (msgqid == -1) {
         perror("msgget: create message queue failed");
@@ -115,7 +115,7 @@ int main(int argc, char **argv) {
             perror("fork: create child process failed");
             return EXIT_FAILURE;
         } else if (pid == 0) {
-            // Child process
+          
             handle_client(msg);
         }
     }
